@@ -11,10 +11,10 @@ test('products list loads and displays products', async ({ page }) => {
 
   expect(await productCards.count()).toBeGreaterThan(0); // Ensure at least one product is displayed
 
-  // Loop through product cards
-  const firstProductName = await productCards.first().locator('h3').textContent();
-  const firstProductBenefit = await productCards.first().locator('p').textContent();
+  const firstCard = productCards.first();
+  const productName = await firstCard.locator('h3').textContent();
+  const benefitText = await firstCard.locator('p').nth(0).textContent();
 
-  expect(firstProductName).toBe('package 1');
-  expect(firstProductBenefit).toBe('200k'); 
+  expect(productName?.trim()).toBe('package 1');
+  expect(benefitText?.trim()).toBe('200k');
 });
